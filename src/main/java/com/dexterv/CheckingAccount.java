@@ -15,6 +15,8 @@ public class CheckingAccount extends Account {
             System.out.println("Insufficient funds!");
         }
 
+        super.printBalance();
+
     }
 
     @Override

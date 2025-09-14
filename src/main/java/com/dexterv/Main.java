@@ -12,22 +12,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        CheckingAccount testAccount = new CheckingAccount("test test", "134-123-444", 10000.50);
-
-        System.out.println(testAccount.toString());
-        System.out.println(testAccount.numberFormat(testAccount.getBalance()));
-        System.out.println(testAccount.getAccountNumber());
-
-        System.out.println(testAccount.getName());
-
-        testAccount.deposit(500000);
-        System.out.println(testAccount.numberFormat(testAccount.getBalance()));
-
-        testAccount.withdraw(10000);
-        System.out.println(testAccount.numberFormat(testAccount.getBalance()));
-
-        System.out.println("Welcome to Banking System");
-
         boolean running = true;
         while (running) {
             showMenu();
@@ -43,6 +27,8 @@ public class Main {
                 switch (Integer.parseInt(choice)) {
                     case 1 -> addAccount();
                     case 2 -> viewAllAccounts();
+                    case 3 -> depositMoney();
+                    case 4 -> withdrawMoney();
                     case 5 -> {
                         System.out.println("Exiting application...");
                         running = false;
@@ -113,5 +99,51 @@ public class Main {
         String separator = String.format("%-30s %-20s %-10s %-20s", "------------------------------", "--------------------", "----------", "--------------------");
         System.out.println(header);
         System.out.println(separator);
+    }
+
+    private static void depositMoney() {
+        System.out.println("Enter account number: ");
+        String accountNumber = scanner.nextLine();
+
+        Account resAccount = findAccountNumber(accountNumber);
+
+        if (resAccount == null){
+            System.out.println("Account Not Found!");
+            return;
+        }
+
+        System.out.println("Enter amount to deposit: ");
+        double deposit = scanner.nextDouble();
+        scanner.nextLine();
+        resAccount.deposit(deposit);
+
+    }
+
+    private static void withdrawMoney() {
+        System.out.println("Enter account number: ");
+        String accountNumber = scanner.nextLine();
+
+        Account resAccount = findAccountNumber(accountNumber);
+
+        if (resAccount == null){
+            System.out.println("Account Not Found!");
+            return;
+        }
+
+        System.out.println("Enter amount to withdraw: ");
+        double withdraw = scanner.nextDouble();
+        scanner.nextLine();
+        resAccount.withdraw(withdraw);
+
+    }
+
+    private static Account findAccountNumber(String accountNumber) {
+
+        for(Account account : accounts){
+            if(account.getAccountNumber().equals(accountNumber)){
+                return account;
+            }
+        }
+        return null;
     }
 }

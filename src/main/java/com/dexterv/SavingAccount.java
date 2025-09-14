@@ -9,7 +9,8 @@ public class SavingAccount extends Account {
     public void deposit(double amount) {
         double interest = amount * 0.02;
         super.deposit(amount +  interest);
-        System.out.println("Deposited : ₱" + super.numberFormat(amount) + " with  ₱" + super.numberFormat(interest) + " interest earned.");
+        System.out.println("Savings Account : interest earned ₱" + super.numberFormat(interest));
+
     }
     @Override
     public void withdraw(double amount) {
@@ -19,6 +20,8 @@ public class SavingAccount extends Account {
         } else {
             System.out.println("Insufficient funds.");
         }
+
+        super.printBalance();
     }
 
     @Override

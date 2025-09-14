@@ -28,6 +28,8 @@ public class Account {
     public void deposit(double amount) {
         this.balance += amount;
         System.out.println(this.name + " deposited: ₱" + numberFormat(amount));
+
+        printBalance();
     }
 
     public void withdraw(double amount){}
@@ -35,6 +37,13 @@ public class Account {
     public String numberFormat(double amount){
         DecimalFormat df = new DecimalFormat("###,###,###.##");
         return df.format(amount);
+    }
+
+    public void printBalance(){
+
+        String savingBalance = "Current Account Balance: ₱" + numberFormat(this.balance);
+
+        System.out.println(savingBalance);
     }
 
     @Override
